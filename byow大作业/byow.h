@@ -65,7 +65,7 @@ void unionSets(DisjointSet* ds, int x, int y);
 // 世界生成核心函数
 World* createWorld(long seed);
 void generateRooms(World* world);
-void connectRooms(World* world); // 替代复杂的MST，使用简化版连接确保连通
+void connectRooms(World* world);
 
 // 游戏操作
 void movePlayer(World* world, char direction);

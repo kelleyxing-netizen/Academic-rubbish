@@ -4,7 +4,7 @@
 #include "byow.h"
 
 // ==================== 随机数生成 (LCG) ====================
-// PDF 5.1 节提到的线性同余生成器
+// PDF 5.1 节线性同余生成器
 static long currentSeed = 0;
 
 void setSeed(long seed) {
@@ -63,7 +63,7 @@ World* createWorld(long seed) {
     // 1. 填充空白
     for (int y = 0; y < MAX_HEIGHT; y++) {
         for (int x = 0; x < MAX_WIDTH; x++) {
-            world->tiles[y][x] = TILE_EMPTY; // 或者 TILE_WALL，看你想做室内还是室外
+            world->tiles[y][x] = TILE_EMPTY;
         }
     }
 
@@ -146,16 +146,11 @@ void drawCorridor(World* world, Point p1, Point p2) {
     world->tiles[y][x] = TILE_FLOOR;
 }
 
-// 连接房间 (简化版MST：只连接相邻索引的房间，并随机增加一些连接以形成环路)
-// PDF要求用MST，这里为了代码不难，我们用一种简单的策略：
-// 1. 将房间0连1, 1连2... 这样保证连通性。
-// 2. 利用并查集来管理（虽然简单链式连接不需要并查集，但为了符合PDF要求，我们演示用法）。
 void connectRooms(World* world) {
     DisjointSet ds;
     initDisjointSet(&ds, world->roomCount);
 
-    // 策略：简单地将数组中相邻的房间连接起来，这保证了所有房间连通
-    // 并查集在这里用于演示“检查是否连通”
+
     for (int i = 0; i < world->roomCount - 1; i++) {
         Point c1 = world->rooms[i].center;
         Point c2 = world->rooms[i+1].center;
@@ -205,7 +200,7 @@ void movePlayer(World* world, char direction) {
 }
 
 void printWorld(World* world) {
-    // 简单的清屏命令 (Windows用cls, Mac/Linux用clear)
+
     #ifdef _WIN32
         system("cls");
     #else

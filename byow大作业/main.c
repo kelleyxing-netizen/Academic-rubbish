@@ -17,7 +17,7 @@ int main() {
         printWorld(myWorld);
 
         printf("Action: ");
-        // 注意：scanf前面的空格是为了消耗掉缓冲区里的回车符
+
         scanf(" %c", &input);
 
         if (input == 'q') {
